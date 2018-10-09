@@ -26,10 +26,10 @@ namespace Weekend_Box_Office
             double total = 0;
             
             // Going through every line of the loaded data.
-            for (int i = 0; i <= rank.Count(); i++)
+            for (int i = 0; i < rank.Count; i++)
             {
                 // If the rank is 1 through 15...
-                if (Int32.Parse(rank[i]) < 16)
+                if (Convert.ToInt32(rank[i]) <= 15)
                 {
                     // Add it to the total
                     total += Convert.ToDouble(gross[i]); 
@@ -63,7 +63,7 @@ namespace Weekend_Box_Office
             // Reading in the values of the files manually
             // There are 49 rows that we have to worry about
             // (ones in top 15, and ones with UK or USA in them)
-            for (int i = 1; i < 50; i++)
+            for (int i = 0; i < 49; i++)
             {
                 Console.Write("What is the rank of the film? ");
                 string rank = Console.ReadLine();
@@ -104,6 +104,8 @@ namespace Weekend_Box_Office
                 Console.Write("What was the total gross? ");
                 string total_gross = Console.ReadLine();
                 l_total_gross.Add(total_gross);
+
+                Console.WriteLine();
             }
             
             Top_15(l_rank, l_weekend_gross);
