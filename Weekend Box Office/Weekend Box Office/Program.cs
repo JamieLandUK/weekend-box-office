@@ -25,7 +25,7 @@ namespace Weekend_Box_Office
         {
             double total = 0;
             
-            // Going through every line of the loaded csv.
+            // Going through every line of the loaded data.
             for (int i = 0; i <= rank.Count(); i++)
             {
                 // If the rank is 1 through 15...
@@ -60,31 +60,50 @@ namespace Weekend_Box_Office
 
         static void Main(string[] args)
         {
-            // Reading the XLS file which has been converted into a .csv file
-            // I have also removed the headers and extra data we don't need from the given file
-            using (var reader = new StreamReader(@"Weekend Box Office.csv"))
-            { 
-                // Keeps going until there is no more left to read
-                while (!reader.EndOfStream)
-                {
-                    // Takes one line from the .csv file
-                    var line = reader.ReadLine();
-                    // Splits each value upon the commas in the .csv file
-                    var values = line.Split(',');
+            // Reading in the values of the files manually
+            // There are 49 rows that we have to worry about
+            // (ones in top 15, and ones with UK or USA in them)
+            for (int i = 1; i < 50; i++)
+            {
+                Console.Write("What is the rank of the film? ");
+                string rank = Console.ReadLine();
+                l_rank.Add(rank);
 
-                    // Each list defined above will take the value which is given
-                    l_rank.Add(values[0]);
-                    l_film.Add(values[1]);
-                    l_origin.Add(values[2]);
-                    l_weekend_gross.Add(values[3]);
-                    l_distributor.Add(values[4]);
-                    l_change.Add(values[5]);
-                    l_weeks_on_release.Add(values[6]);
-                    l_cinemas.Add(values[7]);
-                    l_site_average.Add(values[8]);
-                    l_total_gross.Add(values[9]);
-                }
-                
+                Console.Write("What is the name of the film? ");
+                string name = Console.ReadLine();
+                l_film.Add(name);
+
+                Console.Write("What is the country of origin? ");
+                string origin = Console.ReadLine();
+                l_origin.Add(origin);
+
+                Console.Write("What is the weekend gross? (No £ or ,) ");
+                string weekend_gross = Console.ReadLine();
+                l_weekend_gross.Add(weekend_gross);
+
+                Console.Write("Who is the distributor? ");
+                string distributor = Console.ReadLine();
+                l_distributor.Add(distributor);
+
+                Console.Write("What is the percentage of change in the last week? ");
+                string change = Console.ReadLine();
+                l_change.Add(change);
+
+                Console.Write("How many weeks was in on release? ");
+                string weeks_on_release = Console.ReadLine();
+                l_weeks_on_release.Add(weeks_on_release);
+
+                Console.Write("How many cinemas was it shown in? ");
+                string cinemas = Console.ReadLine();
+                l_cinemas.Add(cinemas);
+
+                Console.Write("How much was earned on average at each site? ");
+                string site_average = Console.ReadLine();
+                l_site_average.Add(site_average);
+
+                Console.Write("What was the total gross? ");
+                string total_gross = Console.ReadLine();
+                l_total_gross.Add(total_gross);
             }
             
             Top_15(l_rank, l_weekend_gross);
