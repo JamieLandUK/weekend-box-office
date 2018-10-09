@@ -32,7 +32,7 @@ namespace Weekend_Box_Office
                 if (Int32.Parse(rank[i]) < 16)
                 {
                     // Add it to the total
-                    total += Double.Parse(gross[i]); 
+                    total += Convert.ToDouble(gross[i]); 
                 }
             }
 
@@ -88,6 +88,7 @@ namespace Weekend_Box_Office
             }
             
             Top_15(l_rank, l_weekend_gross);
+            Console.ReadKey();
         }
     }
 }
