@@ -36,6 +36,9 @@ namespace Weekend_Box_Office
                 }
             }
 
+            //CURRENT WORKING IDEA FOR THIS
+            // ASK FOR THE NECESSARY DATA IN EACH METHOD RATHER THAN GETTING IT ALL AT ONCE
+
             // All them added up divided by the amount of films.
             Console.WriteLine("The weekend gross of the top 15 films is: £{0}", total / 15);
         }
