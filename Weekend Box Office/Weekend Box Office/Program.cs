@@ -9,38 +9,32 @@ namespace Weekend_Box_Office
 {
     class Program
     {
-        static List<string> l_rank = new List<string>(); // The films ranking in the list.
-        static List<string> l_film = new List<string>(); // The name of the film.
-        static List<string> l_origin = new List<string>(); // The country of origin for the film.
-        static List<string> l_weekend_gross = new List<string>(); // The weekend gross of the film.
-        static List<string> l_distributor = new List<string>(); // The distributor of the film.
-        static List<string> l_change = new List<string>(); // The percentage of change in the last week.
-        static List<string> l_weeks_on_release = new List<string>(); // The weeks since the release of the film.
-        static List<string> l_cinemas = new List<string>(); // The number of cinemas which showed the film.
-        static List<string> l_site_average = new List<string>(); // The average of money earned per site.
-        static List<string> l_total_gross = new List<string>(); // The total gross to date.
-
         // Calculate the average of "weekend gross" for all top 15 films.
-        static void Top_15(List<string> rank, List<string> gross)
+        static void Top_15()
         {
-            double total = 0;
-            
-            // Going through every line of the loaded data.
-            for (int i = 0; i < rank.Count; i++)
+            // The only variable needed for this is the weekend gross.
+            double[] movie_weekend_gross = new double[15];
+
+            // Asks for the weekend gross of the top 15 ranked films.
+            for (int i = 0; i < 15; i++)
             {
-                // If the rank is 1 through 15...
-                if (Convert.ToInt32(rank[i]) <= 15)
-                {
-                    // Add it to the total
-                    total += Convert.ToDouble(gross[i]); 
-                }
+                Console.Write("Please enter the amount that rank {0} earned this weekend: ", i+1);
+                string temp = Console.ReadLine();
+                movie_weekend_gross[i] = Convert.ToDouble(temp);
             }
 
-            //CURRENT WORKING IDEA FOR THIS
-            // ASK FOR THE NECESSARY DATA IN EACH METHOD RATHER THAN GETTING IT ALL AT ONCE
+            double total = 0;
+
+            // Go through the array and add it to the total.
+            for (int i = 0; i < 15; i++)
+            {
+                total += movie_weekend_gross[i];
+            }
 
             // All them added up divided by the amount of films.
-            Console.WriteLine("The weekend gross of the top 15 films is: £{0}", total / 15);
+            decimal answer = Convert.ToDecimal(total / 15);
+            Console.WriteLine();
+            Console.WriteLine("The average weekend gross of all the top 15 films is £{0}", answer);
         }
 
         static void All_UK_USA()
@@ -63,56 +57,38 @@ namespace Weekend_Box_Office
 
         static void Main(string[] args)
         {
-            // Reading in the values of the files manually
-            // There are 49 rows that we have to worry about
-            // (ones in top 15, and ones with UK or USA in them)
-            for (int i = 0; i < 49; i++)
+            Console.WriteLine("1) Weekend Gross of the Top 15.");
+            Console.WriteLine("2) Weekend Gross of films from the UK and USA.");
+            Console.WriteLine("3) How many viewings of Disney's Christopher Robin?");
+            Console.WriteLine("4) Weekend gross for the last week.");
+            Console.Write("Where would you like to go? ");
+            string menu_answer = Console.ReadLine();
+
+            switch (menu_answer)
             {
-                Console.Write("What is the rank of the film? ");
-                string rank = Console.ReadLine();
-                l_rank.Add(rank);
-
-                Console.Write("What is the name of the film? ");
-                string name = Console.ReadLine();
-                l_film.Add(name);
-
-                Console.Write("What is the country of origin? ");
-                string origin = Console.ReadLine();
-                l_origin.Add(origin);
-
-                Console.Write("What is the weekend gross? (No £ or ,) ");
-                string weekend_gross = Console.ReadLine();
-                l_weekend_gross.Add(weekend_gross);
-
-                Console.Write("Who is the distributor? ");
-                string distributor = Console.ReadLine();
-                l_distributor.Add(distributor);
-
-                Console.Write("What is the percentage of change in the last week? ");
-                string change = Console.ReadLine();
-                l_change.Add(change);
-
-                Console.Write("How many weeks was in on release? ");
-                string weeks_on_release = Console.ReadLine();
-                l_weeks_on_release.Add(weeks_on_release);
-
-                Console.Write("How many cinemas was it shown in? ");
-                string cinemas = Console.ReadLine();
-                l_cinemas.Add(cinemas);
-
-                Console.Write("How much was earned on average at each site? ");
-                string site_average = Console.ReadLine();
-                l_site_average.Add(site_average);
-
-                Console.Write("What was the total gross? ");
-                string total_gross = Console.ReadLine();
-                l_total_gross.Add(total_gross);
-
-                Console.WriteLine();
+                case "1":
+                    Top_15();
+                    break;
+                case "2":
+                    All_UK_USA();
+                    break;
+                case "3":
+                    How_many_viewings();
+                    break;
+                case "4":
+                    Previous_week();
+                    break;
+                default:
+                    Console.WriteLine();
+                    Console.WriteLine("Please enter a valid menu option.");
+                    Console.WriteLine();
+                    Main(args);
+                    break;
             }
             
-            Top_15(l_rank, l_weekend_gross);
             Console.ReadKey();
+            Console.WriteLine();
+            Main(args);
         }
     }
 }
